@@ -68,12 +68,17 @@ const Home: BlitzPage = () => {
           </div>
           <p>
             <strong>
-              Ogłoszenia samochodów: <br />
+              Ogłoszenia: <br />
             </strong>
           </p>
           <p>
             <Link href="/cars">
-              <a>ogłoszenia</a>
+              <a>Samochody</a>
+            </Link>
+          </p>
+          <p>
+            <Link href="/car-parts">
+              <a>Cześci samochodowe</a>
             </Link>
           </p>
         </main>

@@ -21,6 +21,34 @@ const optionsDamage = [
     value: "Tak",
   },
 ]
+const optionsOwner = [
+  {
+    label: "Nie",
+    value: "Nie",
+  },
+  {
+    label: "Tak",
+    value: "Tak",
+  },
+]
+const optionsCity = [
+  {
+    label: "Łódź",
+    value: "Łódź",
+  },
+  {
+    label: "Tuszyn",
+    value: "Tuszyn",
+  },
+  {
+    label: "Zgierz",
+    value: "Zgierz",
+  },
+  {
+    label: "Rzgów",
+    value: "Rzgów",
+  },
+]
 const options = [
   {
     label: "Wszystkie",
@@ -35,8 +63,8 @@ const options = [
     value: "Diesel",
   },
   {
-    label: "Benzyna+LPG",
-    value: "Benzyna+LPG",
+    label: "LPG",
+    value: "LPG",
   },
   {
     label: "Elektryczny",
@@ -206,8 +234,8 @@ export const CarsList = () => {
             setFilterValue10(e.currentTarget.value)
           }}
         >
-          {optionsDamage.map((optionsDamage) => (
-            <option value={optionsDamage.value}>{optionsDamage.label}</option>
+          {optionsDamage.map((option) => (
+            <option value={option.value}>{option.label}</option>
           ))}
         </select>
       </div>
@@ -219,18 +247,22 @@ export const CarsList = () => {
             setFilterValue11(e.currentTarget.value)
           }}
         >
-          {optionsDamage.map((optionsDamage) => (
-            <option value={optionsDamage.value}>{optionsDamage.label}</option>
+          {optionsOwner.map((option) => (
+            <option value={option.value}>{option.label}</option>
           ))}
         </select>
         <div>
-          Miasto
-          <input
+          Miasto:
+          <select
             value={filterValueCity}
             onChange={(e) => {
               setFilterValue12(e.currentTarget.value)
             }}
-          />
+          >
+            {optionsCity.map((option) => (
+              <option value={option.value}>{option.label}</option>
+            ))}
+          </select>
         </div>
       </div>
 
