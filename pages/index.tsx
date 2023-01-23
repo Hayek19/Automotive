@@ -7,12 +7,20 @@ import logout from "app/auth/mutations/logout"
 import logo from "public/logo2.jpg"
 import { useMutation } from "@blitzjs/rpc"
 import { Routes, BlitzPage } from "@blitzjs/next"
-import { MantineProvider } from "@mantine/core"
-/*
- * This file is just for a pleasant getting started page for your new app.
- * You can delete everything in here and start from scratch if you like.
- */
-
+import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react"
+import {
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  MenuItemOption,
+  MenuGroup,
+  MenuOptionGroup,
+  MenuDivider,
+  Button,
+  Text,
+  // Link,
+} from "@chakra-ui/react"
 const UserInfo = () => {
   const currentUser = useCurrentUser()
   const [logoutMutation] = useMutation(logout)
@@ -61,6 +69,14 @@ const Home: BlitzPage = () => {
           <div className="logo">
             <Image src={`${logo.src}`} alt="blitzjs" width="350px" height="250px" layout="fixed" />
           </div>
+          <div className="findcar">
+            <h1>
+              <strong>
+                <header>FindCar</header>
+              </strong>
+            </h1>
+          </div>
+
           <div className="buttons" style={{ marginTop: "1rem", marginBottom: "1rem" }}>
             <Suspense fallback="Loading...">
               <UserInfo />
@@ -68,17 +84,21 @@ const Home: BlitzPage = () => {
           </div>
           <p>
             <strong>
-              Ogłoszenia: <br />
+              <Text fontFamily="'Open Sans', sans-serif">Zaloguj się!</Text>
             </strong>
           </p>
           <p>
             <Link href="/cars">
-              <a>Samochody</a>
+              <a className="button small">
+                <strong>Samochody</strong>
+              </a>
             </Link>
           </p>
           <p>
             <Link href="/car-parts">
-              <a>Cześci samochodowe</a>
+              <a className="button small">
+                <strong>Cześci samochodowe</strong>
+              </a>
             </Link>
           </p>
         </main>
@@ -122,6 +142,9 @@ const Home: BlitzPage = () => {
             flex-direction: column;
             justify-content: center;
             align-items: center;
+          }
+          .findcar {
+            font-size: 2rem;
           }
 
           main p {

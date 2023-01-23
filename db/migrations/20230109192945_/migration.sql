@@ -12,4 +12,5 @@ CREATE TABLE "CarPart" (
     "hp" INTEGER NOT NULL,
     "engine" INTEGER NOT NULL,
     "city" TEXT NOT NULL
+
 );

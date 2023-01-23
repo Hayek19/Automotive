@@ -41,7 +41,16 @@ export function CarForm<S extends z.ZodType<any, any>>(props: FormProps<S>) {
           placeholder="pojemność silnika"
           type="number"
         />
-        <LabeledTextField name="city" label="Miasto" placeholder="Miasto" />
+        <div id="cars">
+          {" "}
+          <LabeledTextField name="city" label="Miasto" placeholder="Miasto" />
+        </div>
+        <select name="city" id="cars">
+          <option value="volvo">Volvo</option>
+          <option value="saab">Saab</option>
+          <option value="mercedes">Mercedes</option>
+          <option value="audi">Audi</option>
+        </select>
         <LabeledTextField name="phone" label="Telefon" placeholder="Telefon" />
         <LabeledTextField name="doors" label="Ilość drzwi" placeholder="drzwi" type="number" />
         <LabeledTextField name="damage" label="Uszkodzony" placeholder="Uszkodzony" />

@@ -6,15 +6,16 @@ export { FORM_ERROR } from "app/core/components/Form"
 export function CarPartForm<S extends z.ZodType<any, any>>(props: FormProps<S>) {
   return (
     <Form<S> {...props}>
-      <LabeledTextField name="name" label="Name" placeholder="Name" />
-      <LabeledTextField name="type" label="Type" placeholder="Type" />
-      <LabeledTextField name="brand" label="Brand" placeholder="Brand" />
+      <LabeledTextField name="name" label="Nazwa" placeholder="Nazwa" />
+      <LabeledTextField name="type" label="Typ" placeholder="Typ" />
+      <LabeledTextField name="brand" label="Marka" placeholder="Marka" />
       <LabeledTextField name="model" label="Model" placeholder="Model" />
-      <LabeledTextField name="fuel" label="Fuel" placeholder="Fuel" />
-      <LabeledTextField name="description" label="Description" placeholder="Description" />
-      <LabeledTextField name="hp" label="Hp" placeholder="Hp" />
-      <LabeledTextField name="engine" label="Engine" placeholder="Engine" />
-      <LabeledTextField name="city" label="City" placeholder="City" />
+      <LabeledTextField name="fuel" label="Paliwo" placeholder="Paliwo" />
+      <LabeledTextField name="description" label="Opis" placeholder="Opis" />
+      <LabeledTextField name="hp" label="Hp" placeholder="Hp" type="number" />
+      <LabeledTextField name="engine" label="Silnik" placeholder="Silnik" type="number" />
+      <LabeledTextField name="city" label="Miasto" placeholder="Miasto" />
+      <input name="image" placeholder="Zdjecie" type="file" />
     </Form>
   )
 }

@@ -98,4 +98,5 @@ model CarPart {
   hp          Int
   engine      Int
   city        String
+  image       Bytes
 }
