@@ -5,6 +5,7 @@ import { useMutation } from "@blitzjs/rpc"
 import Layout from "app/core/layouts/Layout"
 import createCar from "app/cars/mutations/createCar"
 import { CarForm, FORM_ERROR } from "app/cars/components/CarForm"
+import { supabase } from "lib/supabase"
 
 const NewCarPage = () => {
   const router = useRouter()

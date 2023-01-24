@@ -83,6 +83,16 @@ model Car {
   doors       Int
   damage      String
   firstOwner  String
+  photos      Photo[]
+}
+
+model Photo {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  path      String
+  Car       Car?     @relation(fields: [carId], references: [id])
+  carId     Int?
 }
 
 model CarPart {

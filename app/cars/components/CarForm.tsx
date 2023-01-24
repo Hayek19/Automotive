@@ -23,11 +23,14 @@ import {
   Switch,
   Text,
 } from "@chakra-ui/react"
+import { Dropzone } from "app/core/components/Dropzone"
+
 export function CarForm<S extends z.ZodType<any, any>>(props: FormProps<S>) {
   return (
     <Stack flexDir="column" mb="2" justifyContent="center" alignItems="center">
       <Form<S> {...props}>
-        <LabeledTextField name="name" label="Marka" placeholder="marka"></LabeledTextField>
+        <Dropzone name="photoUrl" />
+        <LabeledTextField name="name" label="Marka" placeholder="marka" />
         <LabeledTextField name="model" label="Model" placeholder="model" />
         <LabeledTextField name="fuel" label="Paliwo" placeholder="paliwo" />
         <LabeledTextField name="mileage" label="Przebieg" placeholder="przebieg" type="number" />
@@ -42,7 +45,6 @@ export function CarForm<S extends z.ZodType<any, any>>(props: FormProps<S>) {
           type="number"
         />
         <div id="cars">
-          {" "}
           <LabeledTextField name="city" label="Miasto" placeholder="Miasto" />
         </div>
         <select name="city" id="cars">
