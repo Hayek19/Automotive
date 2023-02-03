@@ -4,7 +4,7 @@ import Link from "next/link"
 import Layout from "app/core/layouts/Layout"
 import { useCurrentUser } from "app/users/hooks/useCurrentUser"
 import logout from "app/auth/mutations/logout"
-import logo from "public/logo2.jpg"
+import logo from "public/carlogo.png"
 import { useMutation } from "@blitzjs/rpc"
 import { Routes, BlitzPage } from "@blitzjs/next"
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react"
@@ -19,8 +19,33 @@ import {
   MenuDivider,
   Button,
   Text,
+  IconButton,
+  Flex,
+  Heading,
+  Input,
+  InputGroup,
+  Stack,
+  InputLeftElement,
+  chakra,
+  Box,
+  Avatar,
+  FormControl,
+  FormHelperText,
+  InputRightElement,
+  useColorMode,
+  useColorModeValue,
+  FormLabel,
+  Switch,
+  Collapse,
+  Icon,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  useBreakpointValue,
+  useDisclosure,
   // Link,
 } from "@chakra-ui/react"
+import { SearchIcon } from "@chakra-ui/icons"
 const UserInfo = () => {
   const currentUser = useCurrentUser()
   const [logoutMutation] = useMutation(logout)
@@ -28,34 +53,93 @@ const UserInfo = () => {
   if (currentUser) {
     return (
       <>
-        <button
-          className="button small"
-          onClick={async () => {
-            await logoutMutation()
-          }}
-        >
-          Logout
-        </button>
-        <div>
+        <Flex>
+          <Box
+            bgGradient="linear(gray.600, gray.700, gray.600)"
+            color="white"
+            borderRadius="lg"
+            m={{ sm: 4, md: 16, lg: 10 }}
+            p={{ sm: 5, md: 5, lg: 16 }}
+            w="100%"
+            h="250px"
+          >
+            <Button
+              bg="teal.600"
+              onClick={async () => {
+                await logoutMutation()
+              }}
+            >
+              Wyloguj
+            </Button>
+            <div style={{ marginTop: "1rem" }}>
+              <Button bg="teal.600">
+                <Link href="/cars">
+                  <strong>Samochody</strong>
+                </Link>
+              </Button>
+            </div>
+            <div style={{ marginTop: "1rem" }}>
+              <Button bg="teal.600">
+                <Link href="/car-parts">
+                  <strong>Cześci samochodowe</strong>
+                </Link>
+              </Button>
+            </div>{" "}
+          </Box>
+        </Flex>
+
+        {/* <div>
           ID użytkownika: <code>{currentUser.id}</code>
           <br />
           Typ użytkownika: <code>{currentUser.role}</code>
-        </div>
+        </div> */}
       </>
     )
   } else {
     return (
       <>
-        <Link href={Routes.SignupPage()}>
-          <a className="button small">
-            <strong>Rejestracja</strong>
-          </a>
-        </Link>
-        <Link href={Routes.LoginPage()}>
-          <a className="button small">
-            <strong>Logowanie</strong>
-          </a>
-        </Link>
+        <Flex>
+          <Box
+            bgGradient="linear(gray.600, gray.700, gray.600)"
+            color="white"
+            borderRadius="lg"
+            m={{ sm: 4, md: 16, lg: 10 }}
+            p={{ sm: 5, md: 5, lg: 16 }}
+            w="100%"
+            h="250px"
+          >
+            <Button bg="teal.600">
+              <Link href={Routes.SignupPage()}>
+                <strong>Rejestracja</strong>
+              </Link>
+            </Button>
+            <div style={{ marginTop: "1rem" }}>
+              <Button bg="teal.600">
+                <Link href={Routes.LoginPage()}>
+                  <strong>Logowanie</strong>
+                </Link>
+              </Button>
+            </div>
+          </Box>
+        </Flex>
+        {/* <div style={{ marginTop: "3rem" }}>
+          <Button>
+            <Link href={Routes.SignupPage()}>
+              <a className="button small">
+                <strong>Rejestracja</strong>
+              </a>
+            </Link>
+          </Button>
+        </div>
+        <div style={{ marginTop: "3rem" }}>
+          <Button>
+            <Link href={Routes.LoginPage()}>
+              <a className="button small">
+                <strong>Logowanie</strong>
+              </a>
+            </Link>
+          </Button>
+        </div> */}
       </>
     )
   }
@@ -66,15 +150,18 @@ const Home: BlitzPage = () => {
     <Layout title="Home">
       <div className="container">
         <main>
-          <div className="logo">
-            <Image src={`${logo.src}`} alt="blitzjs" width="350px" height="250px" layout="fixed" />
-          </div>
+          {/* <div className="logo">
+            <Image src={`${logo.src}`} alt="blitzjs" width="350px" height="330px" layout="fixed" />
+          </div> */}
           <div className="findcar">
-            <h1>
+            <h1 text-align="center">
               <strong>
-                <header>FindCar</header>
+                <header>
+                  FindCar <SearchIcon boxSize={39} />
+                </header>
               </strong>
             </h1>
+            <h2>Utwórz konto lub zaloguj się aby korzystać z serwisu ogłoszeń motoryzacyjnych</h2>
           </div>
 
           <div className="buttons" style={{ marginTop: "1rem", marginBottom: "1rem" }}>
@@ -82,25 +169,7 @@ const Home: BlitzPage = () => {
               <UserInfo />
             </Suspense>
           </div>
-          <p>
-            <strong>
-              <Text fontFamily="'Open Sans', sans-serif">Zaloguj się!</Text>
-            </strong>
-          </p>
-          <p>
-            <Link href="/cars">
-              <a className="button small">
-                <strong>Samochody</strong>
-              </a>
-            </Link>
-          </p>
-          <p>
-            <Link href="/car-parts">
-              <a className="button small">
-                <strong>Cześci samochodowe</strong>
-              </a>
-            </Link>
-          </p>
+          <div></div>
         </main>
 
         <footer>
@@ -116,6 +185,7 @@ const Home: BlitzPage = () => {
 
           html,
           body {
+            background-image: linear-gradient(#eeeeee, #757575, #212121);
             padding: 0;
             margin: 0;
             font-family: "Libre Franklin", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
@@ -178,6 +248,7 @@ const Home: BlitzPage = () => {
 
           .logo {
             margin-bottom: 2rem;
+            background-color: #e0e0e0;
           }
 
           .logo img {
@@ -216,7 +287,10 @@ const Home: BlitzPage = () => {
             border-color: #45009d;
             color: #45009d;
           }
-
+          h1 {
+            text-align: center;
+            font-size: 60px;
+          }
           pre {
             background: #fafafa;
             border-radius: 5px;

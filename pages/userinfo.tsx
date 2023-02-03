@@ -1,152 +1,94 @@
-import React from "react"
-import { AuthenticationError, PromiseReturnType } from "blitz"
-import { useState } from "react"
-// import Link from "next/link"
-import { LabeledTextField } from "app/core/components/LabeledTextField"
-import { Form, FORM_ERROR } from "app/core/components/Form"
-import login from "app/auth/mutations/login"
-import { Login } from "app/auth/validations"
-import { useMutation } from "@blitzjs/rpc"
-import { Routes } from "@blitzjs/next"
+import { ReactNode } from "react"
 import {
-  ThemeProvider,
-  theme,
-  ColorModeProvider,
-  CSSReset,
   Box,
   Flex,
-  IconButton,
-  useColorMode,
-  Heading,
-  Text,
+  Avatar,
+  HStack,
   Link,
-  FormControl,
-  FormLabel,
-  Input,
-  Stack,
-  Checkbox,
+  IconButton,
   Button,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  MenuDivider,
+  useDisclosure,
+  useColorModeValue,
+  Stack,
 } from "@chakra-ui/react"
-type LoginFormProps = {
-  onSuccess?: (user: PromiseReturnType<typeof login>) => void
-}
-const VARIANT_COLOR = "teal"
+import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons"
 
-const App = () => {
-  return (
-    <ThemeProvider theme={theme}>
-      <ColorModeProvider>
-        <CSSReset />
-        <LoginArea />
-      </ColorModeProvider>
-    </ThemeProvider>
-  )
-}
+const Links = ["Dashboard", "Projects", "Team"]
 
-const LoginArea = () => {
+const NavLink = ({ children }: { children: ReactNode }) => (
+  <Link
+    px={2}
+    py={1}
+    rounded={"md"}
+    _hover={{
+      textDecoration: "none",
+      bg: useColorModeValue("gray.200", "gray.700"),
+    }}
+    href={"#"}
+  >
+    {children}
+  </Link>
+)
+
+export default function Simple() {
+  const { isOpen, onOpen, onClose } = useDisclosure()
+
   return (
-    <Flex minHeight="100vh" width="full" align="center" justifyContent="center">
-      <Box
-        borderWidth={1}
-        px={4}
-        width="full"
-        maxWidth="500px"
-        borderRadius={4}
-        textAlign="center"
-        boxShadow="lg"
-      >
-        <ThemeSelector />
-        <Box p={4}>
-          <LoginHeader />
-          <LoginForm />
-        </Box>
+    <>
+      <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
+        <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
+          <IconButton
+            size={"md"}
+            icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
+            aria-label={"Open Menu"}
+            display={{ md: "none" }}
+            onClick={isOpen ? onClose : onOpen}
+          />
+          <HStack spacing={8} alignItems={"center"}>
+            <Box>Logo</Box>
+            <HStack as={"nav"} spacing={4} display={{ base: "none", md: "flex" }}>
+              {Links.map((link) => (
+                <NavLink key={link}>{link}</NavLink>
+              ))}
+            </HStack>
+          </HStack>
+          <Flex alignItems={"center"}>
+            <Menu>
+              <MenuButton as={Button} rounded={"full"} variant={"link"} cursor={"pointer"} minW={0}>
+                <Avatar
+                  size={"sm"}
+                  src={
+                    "https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9"
+                  }
+                />
+              </MenuButton>
+              <MenuList>
+                <MenuItem>Link 1</MenuItem>
+                <MenuItem>Link 2</MenuItem>
+                <MenuDivider />
+                <MenuItem>Link 3</MenuItem>
+              </MenuList>
+            </Menu>
+          </Flex>
+        </Flex>
+
+        {isOpen ? (
+          <Box pb={4} display={{ md: "none" }}>
+            <Stack as={"nav"} spacing={4}>
+              {Links.map((link) => (
+                <NavLink key={link}>{link}</NavLink>
+              ))}
+            </Stack>
+          </Box>
+        ) : null}
       </Box>
-    </Flex>
+
+      <Box p={4}>Main Content Here</Box>
+    </>
   )
 }
-
-const ThemeSelector = () => {
-  const { colorMode, toggleColorMode } = useColorMode()
-
-  return (
-    <Box textAlign="right" py={4}>
-      <IconButton
-        icon={colorMode === "light" ? "moon" : "sun"}
-        onClick={toggleColorMode}
-        variant="ghost"
-      />
-    </Box>
-  )
-}
-
-const LoginHeader = () => {
-  return (
-    <Box textAlign="center">
-      <Heading>Sign In to Your Account</Heading>
-      <Text>
-        Or <Link color={`${VARIANT_COLOR}.500`}>start your 14 days trial</Link>
-      </Text>
-    </Box>
-  )
-}
-
-const LoginForm = (props: LoginFormProps) => {
-  const [loginMutation] = useMutation(login)
-  const [showPassword, setShowPassword] = useState(false)
-
-  return (
-    <Box my={8} textAlign="left">
-      <form>
-        <Form
-          submitText="SJOdjapojdpo"
-          schema={Login}
-          initialValues={{ email: "", password: "" }}
-          onSubmit={async (values) => {
-            try {
-              const user = await loginMutation(values)
-              props.onSuccess?.(user)
-            } catch (error: any) {
-              if (error instanceof AuthenticationError) {
-                return { [FORM_ERROR]: "Sorry, those credentials are invalid" }
-              } else {
-                return {
-                  [FORM_ERROR]:
-                    "Sorry, we had an unexpected error. Please try again. - " + error.toString(),
-                }
-              }
-            }
-          }}
-        >
-          <FormControl>
-            <LabeledTextField name="email" label="Email" placeholder="adres@gmail.com" />
-          </FormControl>
-
-          <FormControl mt={4}>
-            <LabeledTextField
-              w={10}
-              name="password"
-              label="Hasło"
-              placeholder="Hasło"
-              type="password"
-            />
-          </FormControl>
-
-          <Stack isInline justifyContent="space-between" mt={4}>
-            <Box>
-              <Checkbox>Remember Me</Checkbox>
-            </Box>
-            <Box>
-              <Link color={`${VARIANT_COLOR}.500`}>Forgot your password?</Link>
-            </Box>
-          </Stack>
-
-          <Button variantColor={VARIANT_COLOR} width="full" mt={4}>
-            Sign In
-          </Button>
-        </Form>
-      </form>
-    </Box>
-  )
-}
-
-export default App

@@ -6,22 +6,17 @@ import Layout from "app/core/layouts/Layout"
 import createCar from "app/cars/mutations/createCar"
 import { CarForm, FORM_ERROR } from "app/cars/components/CarForm"
 import { supabase } from "lib/supabase"
-
+import { Button } from "@chakra-ui/react"
 const NewCarPage = () => {
   const router = useRouter()
   const [createCarMutation] = useMutation(createCar)
 
   return (
     <Layout title={"Create New Car"}>
-      <h1>Create New Car</h1>
+      <h1>Stwórz nowe ogłoszenie</h1>
 
       <CarForm
         submitText="Dodaj ogłoszenie"
-        // TODO use a zod schema for form validation
-        //  - Tip: extract mutation's schema into a shared `validations.ts` file and
-        //         then import and use it here
-        // schema={CreateCar}
-        // initialValues={{}}
         onSubmit={async (values) => {
           try {
             const car = await createCarMutation(values)
@@ -36,9 +31,11 @@ const NewCarPage = () => {
       />
 
       <p>
-        <Link href={Routes.CarsPage()}>
-          <a>Cars</a>
-        </Link>
+        <Button bg="teal.400">
+          <Link href={Routes.CarsPage()}>
+            <a>Powrót do ogłoszeń</a>
+          </Link>
+        </Button>
       </p>
     </Layout>
   )

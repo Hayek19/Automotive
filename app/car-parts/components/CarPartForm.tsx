@@ -2,10 +2,30 @@ import { Form, FormProps } from "app/core/components/Form"
 import { LabeledTextField } from "app/core/components/LabeledTextField"
 import { z } from "zod"
 export { FORM_ERROR } from "app/core/components/Form"
-
+import {
+  Flex,
+  Heading,
+  Input,
+  Button,
+  InputGroup,
+  Stack,
+  InputLeftElement,
+  chakra,
+  Box,
+  Avatar,
+  FormControl,
+  FormHelperText,
+  InputRightElement,
+  useColorMode,
+  useColorModeValue,
+  FormLabel,
+  Switch,
+  Text,
+} from "@chakra-ui/react"
 export function CarPartForm<S extends z.ZodType<any, any>>(props: FormProps<S>) {
   return (
     <Form<S> {...props}>
+      {" "}
       <LabeledTextField name="name" label="Nazwa" placeholder="Nazwa" />
       <LabeledTextField name="type" label="Typ" placeholder="Typ" />
       <LabeledTextField name="brand" label="Marka" placeholder="Marka" />

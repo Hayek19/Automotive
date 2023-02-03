@@ -17,7 +17,7 @@ export const Dropzone = forwardRef<HTMLElement, Props>(({ name }) => {
     <section className="container">
       <div {...getRootProps({ className: "dropzone" })}>
         <input {...getInputProps()} />
-        <p>Drag 'n' drop some files here, or click to select files</p>
+        <p>Drag drop some files here, or click to select files</p>
       </div>
       {acceptedFiles.length > 0 && (
         <div>
