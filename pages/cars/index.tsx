@@ -11,26 +11,22 @@ import { e } from "@blitzjs/auth/dist/index-834e37b5"
 import { Car } from "./[carId]"
 import {
   Flex,
-  Heading,
   Input,
   Button,
-  InputGroup,
   Stack,
-  InputLeftElement,
-  chakra,
   Box,
-  Avatar,
-  FormControl,
-  FormHelperText,
-  InputRightElement,
-  useColorMode,
-  useColorModeValue,
-  FormLabel,
-  Switch,
   Text,
   Select,
+  Center,
+  Tfoot,
+  TableCaption,
+  TableContainer,
+  List,
+  ListItem,
+  UnorderedList,
 } from "@chakra-ui/react"
-const ITEMS_PER_PAGE = 100
+
+const ITEMS_PER_PAGE = 3
 const optionsDamage = [
   {
     label: "Nie",
@@ -145,128 +141,118 @@ export const CarsList = () => {
   return (
     <Flex
       alignItems="center"
-      justifyContent="center"
+      justifyContent="right"
       flexDirection="column"
-      bg="gray.600"
+      // background="linear-gradient(#eeeeee, #757575, #212121)"
+      bgGradient="linear(gray.500,gray.400, gray.800)"
       p={3}
       borderRadius={8}
       boxShadow="lg"
       h="120vh"
     >
-      <div>
-        <div>
-          Marka Samochodu:
+      <Stack direction={["column", "row"]} spacing="24px">
+        <Box w="300px" h="70px">
+          <b>Marka Samochodu:</b>
           <Input
-            bg="gray.400"
+            bg="gray.500"
             value={filterValueName}
             onChange={(e) => {
               setFilterValue(e.currentTarget.value)
             }}
           />
-        </div>
-        <div>
-          Model samochodu:
+        </Box>
+        <Box w="300px" h="70px">
+          <b>Model samochodu:</b>
           <Input
-            bg="gray.400"
+            bg="gray.500"
             value={filterValueModel}
             onChange={(e) => {
               setFilterValue2(e.currentTarget.value)
             }}
           />
-        </div>
-        <div>
-          Rodzaj Paliwa:
-          <Select
-            value={filterValueFuel}
+        </Box>
+      </Stack>
+      <Stack direction={["column", "row"]} spacing="24px">
+        <Box w="300px" h="70px">
+          {" "}
+          <b> Cena minimalna:</b>
+          <Input
+            bg="gray.500"
+            type="number"
+            value={filterValueGtePrice}
             onChange={(e) => {
-              setFilterValue3(e.currentTarget.value)
+              setFilterValue4(e.currentTarget.valueAsNumber)
             }}
-          >
-            {options.map((option) => (
-              <option value={option.value}>{option.label}</option>
-            ))}
-          </Select>
-        </div>
-        <div>
-          Cena:
-          <div>
-            Min:
-            <Input
-              bg="gray.400"
-              type="number"
-              value={filterValueGtePrice}
-              onChange={(e) => {
-                setFilterValue4(e.currentTarget.valueAsNumber)
-              }}
-            />
-          </div>
-          <div>
-            Max:
-            <Input
-              bg="gray.400"
-              type="number"
-              value={ffilterValueLtePrice}
-              onChange={(e) => {
-                setFilterValue5(e.currentTarget.valueAsNumber)
-              }}
-            />
-          </div>
-        </div>
-        {/* <input type="number" value={filterValue4} onChange={(e) => {setFilterValue4(e.currentTarget.valueAsNumber)}} /> */}
-
-        <div>
-          Rok produkcji:
-          <div>
-            Od:
-            <Input
-              bg="gray.400"
-              type="number"
-              value={filterValueGteYear}
-              onChange={(e) => {
-                setFilterValue6(e.currentTarget.valueAsNumber)
-              }}
-            />
-          </div>
-          <div>
-            Do:
-            <Input
-              bg="gray.400"
-              type="number"
-              value={filterValueLteYear}
-              onChange={(e) => {
-                setFilterValue7(e.currentTarget.valueAsNumber)
-              }}
-            />
-          </div>
-        </div>
-        <div>
-          Moc Silnika:
-          <div>
-            Min:
-            <Input
-              bg="gray.400"
-              type="number"
-              value={filterValueGteHp}
-              onChange={(e) => {
-                setFilterValue8(e.currentTarget.valueAsNumber)
-              }}
-            />
-          </div>
-          <div>
-            Max:
-            <Input
-              bg="gray.400"
-              type="number"
-              value={filterValueLteHp}
-              onChange={(e) => {
-                setFilterValue7(e.currentTarget.valueAsNumber)
-              }}
-            />
-          </div>
-        </div>
-        <div>
-          Uszkodzony:
+          />
+        </Box>
+        <Box w="300px" h="70px">
+          <b> Cena maksymalna</b>
+          <Input
+            bg="gray.500"
+            type="number"
+            value={ffilterValueLtePrice}
+            onChange={(e) => {
+              setFilterValue5(e.currentTarget.valueAsNumber)
+            }}
+          />
+        </Box>
+      </Stack>
+      <Stack direction={["column", "row"]} spacing="24px">
+        <Box w="300px" h="70px">
+          {" "}
+          <b> Minimalny rok produkcji</b>
+          <Input
+            bg="gray.500"
+            type="number"
+            value={filterValueGteYear}
+            onChange={(e) => {
+              setFilterValue6(e.currentTarget.valueAsNumber)
+            }}
+          />
+        </Box>
+        <Box w="300px" h="70px">
+          {" "}
+          <b>Maksymalny rok produkcji</b>
+          <Input
+            bg="gray.500"
+            type="number"
+            value={filterValueLteYear}
+            onChange={(e) => {
+              setFilterValue7(e.currentTarget.valueAsNumber)
+            }}
+          />
+        </Box>
+      </Stack>
+      <Stack direction={["column", "row"]} spacing="24px">
+        <Box w="300px" h="70px">
+          {" "}
+          <b> Minimalna moc silnika:</b>
+          <Input
+            bg="gray.500"
+            type="number"
+            value={filterValueGteHp}
+            onChange={(e) => {
+              setFilterValue8(e.currentTarget.valueAsNumber)
+            }}
+          />
+        </Box>
+        <Box w="300px" h="70px">
+          <b>Maksymalna moc silnika:</b>
+          <Input
+            bg="gray.500"
+            type="number"
+            value={filterValueLteHp}
+            onChange={(e) => {
+              setFilterValue7(e.currentTarget.valueAsNumber)
+            }}
+          />
+        </Box>
+      </Stack>
+      <Stack direction={["column", "row"]} spacing="24px">
+        <Box w="150px" h="70px">
+          <b>Uszkodzenia:</b>{" "}
           <Select
+            bg="gray.500"
             value={filterValueDamage}
             onChange={(e) => {
               setFilterValue10(e.currentTarget.value)
@@ -276,10 +262,12 @@ export const CarsList = () => {
               <option value={option.value}>{option.label}</option>
             ))}
           </Select>
-        </div>
-        <div>
-          Pierwszy właściciel:
+        </Box>
+        <Box w="150px" h="70px">
+          {" "}
+          <b>Pierwszy właściciel:</b>
           <Select
+            bg="gray.500"
             value={filterValueFirstOwner}
             onChange={(e) => {
               setFilterValue11(e.currentTarget.value)
@@ -289,57 +277,128 @@ export const CarsList = () => {
               <option value={option.value}>{option.label}</option>
             ))}
           </Select>
+        </Box>
+        <Box w="150px" h="70px">
+          {" "}
+          <b> Miasto:</b>
+          <Select
+            bg="gray.500"
+            value={filterValueCity}
+            onChange={(e) => {
+              setFilterValue12(e.currentTarget.value)
+            }}
+          >
+            {optionsCity.map((option) => (
+              <option value={option.value}>{option.label}</option>
+            ))}
+          </Select>
+        </Box>
+        <Box w="150px" h="70px">
+          <b> Rodzaj Paliwa:</b>
+          <Select
+            bg="gray.500"
+            value={filterValueFuel}
+            onChange={(e) => {
+              setFilterValue3(e.currentTarget.value)
+            }}
+          >
+            {options.map((option) => (
+              <option value={option.value}>{option.label}</option>
+            ))}
+          </Select>
+        </Box>
+      </Stack>
+      <Flex
+        alignItems="center"
+        justifyContent="right"
+        flexDirection="column"
+        bgGradient="linear(gray.500,gray.600, gray.500)"
+        boxShadow="lg"
+        h="40vh"
+        w="70vh"
+      >
+        <Center w="100px">
+          <Text fontSize="3xl">
+            {" "}
+            <b>Znalezione samochody:</b>
+          </Text>
+        </Center>
+        <Center w="700px">
           <div>
-            Miasto:
-            <Select
-              value={filterValueCity}
-              onChange={(e) => {
-                setFilterValue12(e.currentTarget.value)
-              }}
-            >
-              {optionsCity.map((option) => (
-                <option value={option.value}>{option.label}</option>
+            <ul>
+              {cars.map((car) => (
+                <UnorderedList key={car.id}>
+                  <Link href={Routes.ShowCarPage({ carId: car.id })}>
+                    <a>
+                      <ListItem
+                        fontSize={"18px"}
+                        color="blackAlpha.900"
+                        fontWeight={"bold"}
+                        lineHeight={"200%"}
+                        fontFamily={"arial"}
+                      >
+                        {car.name +
+                          " " +
+                          car.model +
+                          " (Cena: " +
+                          car.price +
+                          " zł" +
+                          ", Przebieg: " +
+                          car.mileage +
+                          " kilometrów " +
+                          ", Rocznik: " +
+                          car.year +
+                          " rok)"}
+                      </ListItem>
+                    </a>
+                  </Link>
+                </UnorderedList>
               ))}
-            </Select>
+            </ul>
           </div>
-        </div>
+        </Center>
+        <Stack spacing={5}>
+          <Box
+            color="white"
+            borderRadius="lg"
+            m={{ sm: 2, md: 2, lg: 11 }}
+            p={{ sm: 2, md: 2, lg: 11 }}
+          >
+            <Center>
+              {" "}
+              <Button bg="gray.800" disabled={page === 0} onClick={goToPreviousPage}>
+                Poprzednia stron
+              </Button>
+              <Button bg="gray.800" disabled={!hasMore} onClick={goToNextPage}>
+                Następna strona
+              </Button>
+            </Center>
 
-        <p>Znalezione samochody:</p>
-        <ul>
-          {cars.map((car) => (
-            <li key={car.id}>
-              <Link href={Routes.ShowCarPage({ carId: car.id })}>
-                <a>
-                  {car.name +
-                    " " +
-                    car.model +
-                    " (cena: " +
-                    car.price +
-                    "zł" +
-                    ", przebieg: " +
-                    car.mileage +
-                    "km " +
-                    "rocznik: " +
-                    car.year +
-                    "rok)"}
-                </a>
-              </Link>
-            </li>
-          ))}
-        </ul>
-        <Button disabled={page === 0} onClick={goToPreviousPage}>
-          Poprzednia stron
-        </Button>
-        <Button disabled={!hasMore} onClick={goToNextPage}>
-          Następna strona
-        </Button>
-
-        <Button bg="teal.500">
-          <Link href={Routes.Home()}>
-            <a>Strona główna</a>
-          </Link>
-        </Button>
-      </div>
+            <Box
+              color="white"
+              borderRadius="lg"
+              m={{ sm: 2, md: 6, lg: 3 }}
+              p={{ sm: 2, md: 2, lg: 3 }}
+            >
+              <Center>
+                {" "}
+                <Button bg="teal.500">
+                  <Link href={Routes.Home()}>
+                    <a>Strona główna</a>
+                  </Link>
+                </Button>
+                <Button bg="teal.500">
+                  <Link href={Routes.NewCarPage()}>
+                    <a className="button small">
+                      <strong>Dodaj ogłoszenie</strong>
+                    </a>
+                  </Link>
+                </Button>
+              </Center>
+            </Box>
+          </Box>
+        </Stack>
+      </Flex>
     </Flex>
   )
 }
@@ -352,13 +411,13 @@ const CarsPage = () => {
       </Head>
 
       <div>
-        <Button bg="teal.500">
+        {/* <Button bg="teal.500">
           <Link href={Routes.NewCarPage()}>
             <a className="button small">
               <strong>Dodaj ogłoszenie</strong>
             </a>
           </Link>
-        </Button>
+        </Button> */}
 
         <Suspense fallback={<div>Loading...</div>}>
           <CarsList />

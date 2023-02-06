@@ -9,10 +9,10 @@ const CreateCarPart = z.object({
   model: z.string(),
   fuel: z.string(),
   description: z.string(),
-  hp: z.number(),
   engine: z.number(),
   city: z.string(),
-  // image: z.
+  phone: z.number(),
+  price: z.number(),
 })
 
 export default resolver.pipe(resolver.zod(CreateCarPart), resolver.authorize(), async (input) => {

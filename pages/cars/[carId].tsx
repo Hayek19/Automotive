@@ -46,6 +46,7 @@ import {
 } from "@chakra-ui/react"
 import { FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa"
 import { MdLocalShipping } from "react-icons/md"
+import { supabase } from "lib/supabase"
 export const Car = () => {
   const router = useRouter()
   const carId = useParam("carId", "number")
@@ -63,15 +64,9 @@ export const Car = () => {
           >
             <Flex>
               <Image
-                rounded={"md"}
-                alt={"product image"}
                 src={
-                  "https://images.unsplash.com/photo-1596516109370-29001ec8ec36?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyODE1MDl8MHwxfGFsbHx8fHx8fHx8fDE2Mzg5MzY2MzE&ixlib=rb-1.2.1&q=80&w=1080"
+                  supabase.storage.from("car-photos").getPublicUrl("uplodadedUrl").data.publicUrl
                 }
-                fit={"cover"}
-                align={"center"}
-                w={"100%"}
-                h={{ base: "100%", sm: "400px", lg: "500px" }}
               />
             </Flex>
 

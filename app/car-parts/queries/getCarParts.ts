@@ -1,17 +1,13 @@
-import { paginate } from "blitz";
-import { resolver } from "@blitzjs/rpc";
-import db, { Prisma } from "db";
+import { paginate } from "blitz"
+import { resolver } from "@blitzjs/rpc"
+import db, { Prisma } from "db"
 
 interface GetCarPartsInput
-  extends Pick<
-    Prisma.CarPartFindManyArgs,
-    "where" | "orderBy" | "skip" | "take"
-  > {}
+  extends Pick<Prisma.CarPartFindManyArgs, "where" | "orderBy" | "skip" | "take"> {}
 
 export default resolver.pipe(
   resolver.authorize(),
   async ({ where, orderBy, skip = 0, take = 100 }: GetCarPartsInput) => {
-    // TODO: in multi-tenant app, you must add validation to ensure correct tenant
     const {
       items: carParts,
       hasMore,
@@ -21,15 +17,14 @@ export default resolver.pipe(
       skip,
       take,
       count: () => db.carPart.count({ where }),
-      query: (paginateArgs) =>
-        db.carPart.findMany({ ...paginateArgs, where, orderBy }),
-    });
+      query: (paginateArgs) => db.carPart.findMany({ ...paginateArgs, where, orderBy }),
+    })
 
     return {
       carParts,
       nextPage,
       hasMore,
       count,
-    };
+    }
   }
-);
+)

@@ -93,6 +93,8 @@ model Photo {
   path      String
   Car       Car?     @relation(fields: [carId], references: [id])
   carId     Int?
+  CarPart   CarPart? @relation(fields: [carPartId], references: [id])
+  carPartId Int?
 }
 
 model CarPart {
@@ -105,8 +107,11 @@ model CarPart {
   model       String
   fuel        String
   description String
-  hp          Int
+  price       Int
   engine      Int
   city        String
   image       Bytes
+  photos      Photo[]
+  userID      Int
+  phone       Int
 }

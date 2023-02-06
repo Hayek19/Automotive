@@ -68,7 +68,7 @@ export const LoginForm = (props: LoginFormProps) => {
                 props.onSuccess?.(user)
               } catch (error: any) {
                 if (error instanceof AuthenticationError) {
-                  return { [FORM_ERROR]: "Sorry, those credentials are invalid" }
+                  return { [FORM_ERROR]: "Wprowadzone dane są niepoprawne!" }
                 } else {
                   return {
                     [FORM_ERROR]:
@@ -114,7 +114,7 @@ export const LoginForm = (props: LoginFormProps) => {
                 color="black"
                 _hover={{ bg: "#1D4044" }}
               >
-                <Text fontFamily="'Open Sans', sans-serif">Login</Text>
+                <Text fontFamily="'Open Sans', sans-serif">Zaloguj</Text>
               </Button>
               <FormControl display="flex" alignItems="center">
                 <FormLabel htmlFor="dark_mode" mb="0">

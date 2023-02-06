@@ -67,7 +67,10 @@ export const SignupForm = (props: SignupFormProps) => {
               } catch (error: any) {
                 if (error.code === "P2002" && error.meta?.target?.includes("email")) {
                   // This error comes from Prisma
-                  return { email: "This email is already being used" }
+                  return {
+                    email:
+                      "Podany adres email istnieje już w naszej bazie danych. Zaloguj się, jeśli to twoje konto!",
+                  }
                 } else {
                   return { [FORM_ERROR]: error.toString() }
                 }
@@ -110,7 +113,7 @@ export const SignupForm = (props: SignupFormProps) => {
                 color="black"
                 _hover={{ bg: "#1D4044" }}
               >
-                <Text fontFamily="'Open Sans', sans-serif">Login</Text>
+                <Text fontFamily="'Open Sans', sans-serif">Zarejestruj</Text>
               </Button>
               <FormControl display="flex" alignItems="center">
                 <FormLabel htmlFor="dark_mode" mb="0">

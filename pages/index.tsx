@@ -81,7 +81,7 @@ const UserInfo = () => {
             <div style={{ marginTop: "1rem" }}>
               <Button bg="teal.600">
                 <Link href="/car-parts">
-                  <strong>Cześci samochodowe</strong>
+                  <strong>Części samochodowe</strong>
                 </Link>
               </Button>
             </div>{" "}
@@ -100,7 +100,7 @@ const UserInfo = () => {
       <>
         <Flex>
           <Box
-            bgGradient="linear(gray.600, gray.700, gray.600)"
+            bgGradient="linear(gray.500, gray.400, gray.500)"
             color="white"
             borderRadius="lg"
             m={{ sm: 4, md: 16, lg: 10 }}
@@ -122,24 +122,6 @@ const UserInfo = () => {
             </div>
           </Box>
         </Flex>
-        {/* <div style={{ marginTop: "3rem" }}>
-          <Button>
-            <Link href={Routes.SignupPage()}>
-              <a className="button small">
-                <strong>Rejestracja</strong>
-              </a>
-            </Link>
-          </Button>
-        </div>
-        <div style={{ marginTop: "3rem" }}>
-          <Button>
-            <Link href={Routes.LoginPage()}>
-              <a className="button small">
-                <strong>Logowanie</strong>
-              </a>
-            </Link>
-          </Button>
-        </div> */}
       </>
     )
   }
@@ -150,9 +132,6 @@ const Home: BlitzPage = () => {
     <Layout title="Home">
       <div className="container">
         <main>
-          {/* <div className="logo">
-            <Image src={`${logo.src}`} alt="blitzjs" width="350px" height="330px" layout="fixed" />
-          </div> */}
           <div className="findcar">
             <h1 text-align="center">
               <strong>
@@ -185,7 +164,7 @@ const Home: BlitzPage = () => {
 
           html,
           body {
-            background-image: linear-gradient(#eeeeee, #757575, #212121);
+            background: linear-gradient(#9e9e9e, #bdbdbd, #424242);
             padding: 0;
             margin: 0;
             font-family: "Libre Franklin", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,

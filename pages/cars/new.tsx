@@ -6,38 +6,41 @@ import Layout from "app/core/layouts/Layout"
 import createCar from "app/cars/mutations/createCar"
 import { CarForm, FORM_ERROR } from "app/cars/components/CarForm"
 import { supabase } from "lib/supabase"
-import { Button } from "@chakra-ui/react"
+import { Button, Text, Flex, Box, Stack } from "@chakra-ui/react"
 const NewCarPage = () => {
   const router = useRouter()
   const [createCarMutation] = useMutation(createCar)
 
   return (
-    <Layout title={"Create New Car"}>
-      <h1>Stwórz nowe ogłoszenie</h1>
-
-      <CarForm
-        submitText="Dodaj ogłoszenie"
-        onSubmit={async (values) => {
-          try {
-            const car = await createCarMutation(values)
-            await router.push(Routes.ShowCarPage({ carId: car.id }))
-          } catch (error: any) {
-            console.error(error)
-            return {
-              [FORM_ERROR]: error.toString(),
+    <Flex bgGradient="linear(gray.600, gray.700, gray.600)">
+      <Box
+        bgGradient="linear(gray.600, gray.700, gray.600)"
+        color="white"
+        borderRadius="lg"
+        m={{ sm: 4, md: 16, lg: 10 }}
+        p={{ sm: 5, md: 5, lg: 16 }}
+        w="100%"
+        h="100%"
+      >
+        <CarForm
+          // submitText="Dodaj ogłoszenie"
+          onSubmit={async (values) => {
+            try {
+              const car = await createCarMutation(values)
+              await router.push(Routes.ShowCarPage({ carId: car.id }))
+            } catch (error: any) {
+              console.error(error)
+              return {
+                [FORM_ERROR]: error.toString(),
+              }
             }
-          }
-        }}
-      />
-
-      <p>
-        <Button bg="teal.400">
-          <Link href={Routes.CarsPage()}>
-            <a>Powrót do ogłoszeń</a>
-          </Link>
-        </Button>
-      </p>
-    </Layout>
+          }}
+        />
+        {/* <Stack spacing={10} p="3rem" boxShadow="md">
+          <Button bg="teal.500">Dodaj ogłoszenie</Button>
+        </Stack> */}
+      </Box>
+    </Flex>
   )
 }
 

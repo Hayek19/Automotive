@@ -1,11 +1,6 @@
 import { resolver } from "@blitzjs/rpc"
 import db from "db"
 import { z } from "zod"
-import { useQuery } from "@blitzjs/rpc"
-import getCurrentUser from "app/users/queries/getCurrentUser"
-import getCurrentUserId from "app/users/queries/getCurrentUserId"
-import { useCurrentUser } from "app/users/hooks/useCurrentUser"
-import { useCurrentUserId } from "app/users/hooks/useCurrentUserId"
 
 const CreateCar = z.object({
   name: z.string(),

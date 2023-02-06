@@ -12,40 +12,39 @@ interface Props extends InputProps {
 export const Dropzone = forwardRef<HTMLElement, Props>(({ name }) => {
   const { acceptedFiles, getRootProps, getInputProps } = useDropzone()
   const [uplodadedUrl, setUploadedUrl] = useState("")
-
   return (
-    <section className="container">
-      <div {...getRootProps({ className: "dropzone" })}>
-        <input {...getInputProps()} />
-        <p>Drag drop some files here, or click to select files</p>
-      </div>
-      {acceptedFiles.length > 0 && (
-        <div>
-          <h4>Accepted files</h4>
-          <ul>
-            {acceptedFiles.map((file) => (
-              <Box boxSize="sm">
-                <Image src={URL.createObjectURL(file)} />
-                {/* <Image
-                  src={supabase.storage.from("car-photos").getPublicUrl(photoUrl).data.publicUrl}
-                /> */}
-              </Box>
-            ))}
-          </ul>
+    <Box bg="gray.800">
+      <section className="container">
+        <div {...getRootProps({ className: "dropzone" })}>
+          <input {...getInputProps()} />
+          <p>Kliknij tutaj lub przeciągnij ręcznie zdjęcie aby je dodać!</p>
         </div>
-      )}
-      <LabeledTextField name={name} label="" style={{ display: "none" }} value={uplodadedUrl} />
-      <Button
-        onClick={async () => {
-          if (!acceptedFiles[0]) return
-          const { data } = await supabase.storage
-            .from("car-photos")
-            .upload(`avatar.png`, acceptedFiles[0])
-          if (data?.path) setUploadedUrl(data?.path)
-        }}
-      >
-        Upload
-      </Button>
-    </section>
+        {acceptedFiles.length > 0 && (
+          <div>
+            <h4>Accepted files</h4>
+            <ul>
+              {acceptedFiles.map((file) => (
+                <Box boxSize="sm" key={file.name}>
+                  <Image src={URL.createObjectURL(file)} />
+                </Box>
+              ))}
+            </ul>
+          </div>
+        )}
+        <LabeledTextField name={name} label="" style={{ display: "none" }} value={uplodadedUrl} />
+        <Button
+          bg="gray.600"
+          onClick={async () => {
+            if (!acceptedFiles[0]) return
+            const { data } = await supabase.storage
+              .from("car-photos")
+              .upload(`avatar.png`, acceptedFiles[0])
+            if (data?.path) setUploadedUrl(data?.path)
+          }}
+        >
+          Zatwierdź
+        </Button>
+      </section>
+    </Box>
   )
 })
