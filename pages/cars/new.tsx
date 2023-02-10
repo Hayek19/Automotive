@@ -23,7 +23,7 @@ const NewCarPage = () => {
         h="100%"
       >
         <CarForm
-          // submitText="Dodaj ogłoszenie"
+          submitText="Dodaj ogłoszenie"
           onSubmit={async (values) => {
             try {
               const car = await createCarMutation(values)

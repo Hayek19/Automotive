@@ -61,7 +61,7 @@ const UserInfo = () => {
             m={{ sm: 4, md: 16, lg: 10 }}
             p={{ sm: 5, md: 5, lg: 16 }}
             w="100%"
-            h="250px"
+            h="300px"
           >
             <Button
               bg="teal.600"
@@ -82,6 +82,13 @@ const UserInfo = () => {
               <Button bg="teal.600">
                 <Link href="/car-parts">
                   <strong>Części samochodowe</strong>
+                </Link>
+              </Button>
+            </div>{" "}
+            <div style={{ marginTop: "1rem" }}>
+              <Button bg="teal.600">
+                <Link href="/auth/reset-password">
+                  <strong>Zmiana hasła</strong>
                 </Link>
               </Button>
             </div>{" "}

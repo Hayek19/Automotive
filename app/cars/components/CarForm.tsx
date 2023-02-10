@@ -23,9 +23,10 @@ import {
   useColorModeValue,
   FormLabel,
   Switch,
-  Text,
   SimpleGrid,
   Center,
+  Select,
+  Text,
 } from "@chakra-ui/react"
 import { Dropzone } from "app/core/components/Dropzone"
 
@@ -36,7 +37,6 @@ export function CarForm<S extends z.ZodType<any, any>>(props: FormProps<S>) {
         <Flex bgGradient="linear(gray.600, gray.700, gray.600)">
           <Box
             bgGradient="linear(gray.600, gray.700, gray.600)"
-            color="white"
             borderRadius="lg"
             m={{ sm: 4, md: 16, lg: 10 }}
             p={{ sm: 5, md: 5, lg: 16 }}
@@ -51,7 +51,7 @@ export function CarForm<S extends z.ZodType<any, any>>(props: FormProps<S>) {
               spacing={{ base: 8, md: 10 }}
               py={{ base: 18, md: 24 }}
             >
-              <LabeledTextField color="red" name="name" label="Marka" placeholder="marka" />
+              <LabeledTextField name="name" label="Marka" placeholder="marka" />
               <LabeledTextField name="model" label="Model" placeholder="model" />
               <LabeledTextField name="fuel" label="Paliwo" placeholder="paliwo" />
               <LabeledTextField
@@ -75,7 +75,17 @@ export function CarForm<S extends z.ZodType<any, any>>(props: FormProps<S>) {
                 placeholder="pojemność silnika"
                 type="number"
               />
-              <LabeledTextField name="city" label="Miasto" placeholder="Miasto" />
+              <Box>
+                <Text>Miasto:</Text>
+                <Select color="black" w="200px" name="city" label="Miasto" placeholder="Miasto">
+                  <option color="red" value="option1">
+                    Łódź
+                  </option>
+                  <option value="option2">Tuszyn</option>
+                  <option value="option3">Rzgów</option>
+                </Select>
+              </Box>
+              {/* <LabeledTextField name="city" label="Miasto" placeholder="Miasto" /> */}
               <LabeledTextField name="phone" label="Numer telefonu" placeholder="Numer telefonu" />
               <LabeledTextField
                 name="doors"

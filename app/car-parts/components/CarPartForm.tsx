@@ -2,6 +2,8 @@ import { Form, FormProps } from "app/core/components/Form"
 import { LabeledTextField } from "app/core/components/LabeledTextField"
 import { z } from "zod"
 export { FORM_ERROR } from "app/core/components/Form"
+import Link from "next/link"
+import { Routes } from "@blitzjs/next"
 import {
   Flex,
   Heading,
@@ -21,6 +23,7 @@ import {
   FormLabel,
   Switch,
   Text,
+  Select,
   SimpleGrid,
   Center,
 } from "@chakra-ui/react"
@@ -54,7 +57,16 @@ export function CarPartForm<S extends z.ZodType<any, any>>(props: FormProps<S>) 
               <LabeledTextField name="fuel" label="Paliwo" placeholder="Paliwo" />
               <LabeledTextField name="description" label="Opis" placeholder="Opis" />
               <LabeledTextField name="engine" label="Silnik" placeholder="Silnik" type="number" />
-              <LabeledTextField name="city" label="Miasto" placeholder="Miasto" />
+              <Box>
+                <Text>Miasto:</Text>
+                <Select color="black" w="200px" name="city" label="Miasto" placeholder="Miasto">
+                  <option color="red" value="option1">
+                    Łódź
+                  </option>
+                  <option value="option2">Tuszyn</option>
+                  <option value="option3">Rzgów</option>
+                </Select>
+              </Box>
               <LabeledTextField
                 name="phone"
                 label="Numer telefonu"
@@ -64,6 +76,22 @@ export function CarPartForm<S extends z.ZodType<any, any>>(props: FormProps<S>) 
               <LabeledTextField name="price" label="Cena" placeholder="Cena" type="number" />
               <Dropzone name="photoUrl" />
             </SimpleGrid>
+            <Stack spacing={10} p="3rem" boxShadow="md">
+              <Center>
+                <p>
+                  <Button bg="teal.400">Dodaj ogłoszenie</Button>
+                </p>
+              </Center>
+              <Center>
+                <p>
+                  <Button bg="teal.400">
+                    <Link href={Routes.CarsPage()}>
+                      <a>Powrót do ogłoszeń</a>
+                    </Link>
+                  </Button>
+                </p>
+              </Center>
+            </Stack>
           </Box>
         </Flex>
       </Form>

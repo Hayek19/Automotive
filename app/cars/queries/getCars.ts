@@ -1,6 +1,6 @@
-import { paginate } from "blitz";
-import { resolver } from "@blitzjs/rpc";
-import db, { Prisma } from "db";
+import { paginate } from "blitz"
+import { resolver } from "@blitzjs/rpc"
+import db, { Prisma } from "db"
 
 interface GetCarsInput
   extends Pick<Prisma.CarFindManyArgs, "where" | "orderBy" | "skip" | "take"> {}
@@ -8,7 +8,6 @@ interface GetCarsInput
 export default resolver.pipe(
   resolver.authorize(),
   async ({ where, orderBy, skip = 0, take = 100 }: GetCarsInput) => {
-    // TODO: in multi-tenant app, you must add validation to ensure correct tenant
     const {
       items: cars,
       hasMore,
@@ -18,15 +17,14 @@ export default resolver.pipe(
       skip,
       take,
       count: () => db.car.count({ where }),
-      query: (paginateArgs) =>
-        db.car.findMany({ ...paginateArgs, where, orderBy }),
-    });
+      query: (paginateArgs) => db.car.findMany({ ...paginateArgs, where, orderBy }),
+    })
 
     return {
       cars,
       nextPage,
       hasMore,
       count,
-    };
+    }
   }
-);
+)

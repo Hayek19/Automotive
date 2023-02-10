@@ -15,9 +15,13 @@ const CreateCarPart = z.object({
   price: z.number(),
 })
 
-export default resolver.pipe(resolver.zod(CreateCarPart), resolver.authorize(), async (input) => {
-  // TODO: in multi-tenant app, you must add validation to ensure correct tenant
-  const carPart = await db.carPart.create({ data: input })
+export default resolver.pipe(
+  resolver.zod(CreateCarPart),
+  resolver.authorize(),
+  async (input, context) => {
+    const userID = context.session.userId
+    const carPart = await db.carPart.create({ data: { ...input, userID } })
 
-  return carPart
-})
+    return carPart
+  }
+)

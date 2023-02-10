@@ -38,7 +38,7 @@ export const Dropzone = forwardRef<HTMLElement, Props>(({ name }) => {
             if (!acceptedFiles[0]) return
             const { data } = await supabase.storage
               .from("car-photos")
-              .upload(`avatar.png`, acceptedFiles[0])
+              .upload("image.jpg", acceptedFiles[0])
             if (data?.path) setUploadedUrl(data?.path)
           }}
         >

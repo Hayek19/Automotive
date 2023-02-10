@@ -66,7 +66,6 @@ export const SignupForm = (props: SignupFormProps) => {
                 props.onSuccess?.()
               } catch (error: any) {
                 if (error.code === "P2002" && error.meta?.target?.includes("email")) {
-                  // This error comes from Prisma
                   return {
                     email:
                       "Podany adres email istnieje już w naszej bazie danych. Zaloguj się, jeśli to twoje konto!",
@@ -83,7 +82,7 @@ export const SignupForm = (props: SignupFormProps) => {
                   <InputLeftElement
                     pointerEvents="none"
                     left="1.2cm"
-                    children={<CFaUserAlt color="black" />}
+                    // children={<CFaUserAlt color="black" />}
                   />
                   <LabeledTextField name="email" label="Email" placeholder="adres@gmail.com" />
                 </InputGroup>
@@ -93,7 +92,7 @@ export const SignupForm = (props: SignupFormProps) => {
                   <InputLeftElement
                     pointerEvents="none"
                     left="1.1cm"
-                    children={<CFaLock color="black" />}
+                    // children={<CFaLock color="black" />}
                   />
                   <LabeledTextField
                     name="password"

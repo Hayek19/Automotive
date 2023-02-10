@@ -23,7 +23,6 @@ export default resolver.pipe(
   resolver.zod(CreateCar),
   resolver.authorize(),
   async (input, context) => {
-    // TODO: in multi-tenant app, you must add validation to ensure correct tenant
     const userID = context.session.userId
     const car = await db.car.create({ data: { ...input, userID } })
 
